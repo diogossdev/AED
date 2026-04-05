@@ -9,14 +9,45 @@ class PilhaEncadeada:
     def motor(self):
         return self._motor
     
+    def ehVazia(self):
+        if self.motor.tamanho == 0:
+            return True
+        else:
+            return False
+    
     def empilhar(self, valor):
         self.motor.adicionar_inicio(valor)
+        return "Empilhado com sucesso!"
 
     def desempilhar(self):
-        self.motor.remover_inicio()
+        if self.ehVazia():
+            return "Lista já vazia."
+        else:
+            self.motor.remover_inicio()
+            return "Desempilhado com sucesso!"
+
+    def topo(self):
+        if self.ehVazia():
+            return "Lista Vazia."
+        else:
+            return str(self.motor.cabeca.valor)
+        
+    def tamanho_pilha(self):
+        return self.motor.tamanho
+    
+    def esvaziar_pilha(self):
+        if self.ehVazia():
+            return "Pilha já vazia."
+        else:
+            self.motor.cabeca = None
+            self.motor.tamanho = 0
+            return "Pilha limpa com sucesso."
 
     def __str__(self):
-        return str(self.motor)
+        if self.ehVazia():
+            return "Lista Vazia no momento."
+        else:
+            return str(self.motor)
     
 class FilaEncadeada:
     def __init__(self):
