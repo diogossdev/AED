@@ -21,7 +21,11 @@ def main():
             valor_empilhar = input('Digite o que será empilhado: ')
             print(pilha.empilhar(valor_empilhar))
         elif acao == 2:
-            print(pilha.desempilhar())
+            verificador = pilha.desempilhar()
+            if verificador:
+                print('Lista já vazia.')
+            else:
+                print('Valor desempilhado com sucesso!')
         elif acao == 3:
             print(pilha.topo())
         elif acao == 4:

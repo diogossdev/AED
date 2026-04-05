@@ -21,10 +21,11 @@ class PilhaEncadeada:
 
     def desempilhar(self):
         if self.ehVazia():
-            return "Lista já vazia."
+            return True
         else:
+            valor = self.topo()
             self.motor.remover_inicio()
-            return "Desempilhado com sucesso!"
+            return valor
 
     def topo(self):
         if self.ehVazia():
