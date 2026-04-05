@@ -29,7 +29,7 @@ class PilhaEncadeada:
 
     def topo(self):
         if self.ehVazia():
-            return "Lista Vazia."
+            return "Pilha Vazia."
         else:
             return str(self.motor.cabeca.valor)
         
@@ -46,7 +46,7 @@ class PilhaEncadeada:
 
     def __str__(self):
         if self.ehVazia():
-            return "Lista Vazia no momento."
+            return "Pilha Vazia no momento."
         else:
             return str(self.motor)
     
@@ -58,14 +58,46 @@ class FilaEncadeada:
     def motor(self):
         return self._motor
     
-    def adicionar(self, valor):
+    def ehVazio(self):
+        if self.tamanho() == 0:
+            return True
+        else:
+            return False
+    
+    def inserir(self, valor):
         self.motor.adicionar_inicio(valor)
+        return "Valor adicionado com sucesso!"
+
+    def exibir_primeiro(self):
+        if self.ehVazio():
+            return "Fila Vazia."
+        else:
+            return self.motor.cabeca.valor
 
     def remover(self):
-        self.motor.remover_final()
+        if self.ehVazio():
+            return "A fila já está vazia."
+        else:
+            self.motor.remover_final()
+            return "Valor removido com sucesso!"
+            #Se precisar retornar o valor, terei que fazer a cauda do último valor de ListaEncadeada
+
+    def tamanho(self):
+        return self.motor.tamanho
+    
+    def esvaziar_fila(self):
+        if self.ehVazio():
+            return "A fila já está vazia."
+        else:
+            self.motor.tamanho = 0
+            self.motor.cabeca = None
+            return "Fila esvaziada com sucesso!"
 
     def __str__(self):
-        return str(self.motor)
+        if self.ehVazio():
+            return "Fila sem elementos."
+        else: 
+            return str(self.motor)
     
 #Programa Principal
 def main():
@@ -78,11 +110,11 @@ def main():
     print(objeto)
 
     fila = FilaEncadeada()
-    fila.adicionar(10)
-    fila.adicionar(20)
-    fila.adicionar(40)
+    fila.inserir(10)
+    fila.inserir(20)
+    fila.inserir(40)
     fila.remover()
-    fila.adicionar(30)
+    fila.inserir(30)
     print(fila)
 
 if __name__ == "__main__":
