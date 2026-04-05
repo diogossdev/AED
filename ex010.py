@@ -65,7 +65,7 @@ class FilaEncadeada:
             return False
     
     def inserir(self, valor):
-        self.motor.adicionar_inicio(valor)
+        self.motor.adicionar_final(valor)
         return "Valor adicionado com sucesso!"
 
     def exibir_primeiro(self):
@@ -78,7 +78,7 @@ class FilaEncadeada:
         if self.ehVazio():
             return "A fila já está vazia."
         else:
-            self.motor.remover_final()
+            self.motor.remover_inicio()
             return "Valor removido com sucesso!"
             #Se precisar retornar o valor, terei que fazer a cauda do último valor de ListaEncadeada
 
