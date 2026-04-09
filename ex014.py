@@ -2,36 +2,33 @@
 from ex010 import FilaEncadeada
 from ex009 import ListaEncadeada
 
-'''Quando voltar --- corrgir funções e anotar principais erros + fazer novos exercícios de fixação
-    Tomar cuidado com caminhante - loop de ponteiros infinitos - atribuições erradas - lógica incompleta e falha
-'''
-
 #Funções
 def adicionar_cliente(clientes, contador):
     clientes.inserir(contador)
 
 def atender_cliente(guiches, clientes):
-    atual = guiches.cabeca
-    if atual.valor == 0:
-        atual.valor = clientes.cabeca.valor
-        clientes.remover()
-        return True
+    if clientes.tamanho() == 0:
+        return "Sem Clientes"
     else:
-        if atual.proximo == None:
-            return False
-        else:
-            atual.proximo
+        atual = guiches.cabeca
+        while atual is not None: 
+            if atual.valor == 0:
+                atual.valor = clientes.exibir_primeiro()
+                clientes.remover()
+                return True
+            else:
+                atual = atual.proximo
+        return False
 
 def limpar_guiche(guiches):
-    atual = guiches
-    while True:
-        if atual.cabeca.valor == 0 and atual.cabeca.proximo != None:
-            atual.cabeca.proximo
-        elif atual.cabeca.valor != 0:
-            atual.cabeca.valor = 0
-            return True
+    atual = guiches.cabeca
+    while atual is not None:
+        if atual.valor == 0:
+            atual = atual.proximo
         else:
-            return False
+            atual.valor = 0
+            return True
+    return False
         
 def monitorar_fila(clientes):
     quantidade = clientes.tamanho()
@@ -42,16 +39,19 @@ def monitorar_guiches(guiches):
     guiches_vazios = 0
     atual = guiches.cabeca
     while atual is not None:
-        if atual.cabeca.valor == 0:
+        if atual.valor == 0:
             guiches_vazios += 1
-            atual.proximo
+            atual = atual.proximo
         else:
             guiches_cheios += 1
-            atual.proximo
-    return f"Temos atualmente {guiches_vazios} guichês vazios e {guiches_cheios} cheios!"
+            atual = atual.proximo
+    return f"Temos atualmente {guiches_vazios} guichês vazios e {guiches_cheios} guichês cheios!"
         
 def proxima_senha(clientes):
-    return f"A senha atual é {clientes.cabeca.valor} e a próxima senha é {clientes.cabeca.proximo.valor}"
+    if clientes.tamanho() == 0:
+        return "Não há clientes na fila e não há próxima senha."
+    else:
+        return f"A próxima senha a ser chamada será {clientes.exibir_primeiro()}"
 
 #Programa Principal
 def main():
@@ -76,15 +76,17 @@ def main():
         Número: '''))
 
         if verificador == 1:
-            adicionar_cliente(contador)
+            adicionar_cliente(clientes, contador)
             contador += 1
             print("Cliente adicionado com sucesso!")
         elif verificador == 2:
             tem_guiche = atender_cliente(guiches, clientes)
-            if tem_guiche:
-                print("cliente indo para atendimento com sucesso!")
+            if tem_guiche == True:
+                print("Cliente indo para atendimento com sucesso!")
+            elif tem_guiche == False:
+                print("Todos os guichês já estavam ocupados.")
             else:
-                print("Todos os guichês estavam já ocupados.")
+                print("Não haviam clientes na fila.")
         elif verificador == 3:
             limpando_guiche = limpar_guiche(guiches)
             if limpando_guiche:
@@ -96,7 +98,7 @@ def main():
         elif verificador == 5:
             print(monitorar_guiches(guiches))
         elif verificador == 6:
-            proxima_senha(clientes)
+            print(proxima_senha(clientes))
         elif verificador == 7:
             if limpar_guiche(guiches) == False and clientes.tamanho() == 0:
                 break
