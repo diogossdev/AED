@@ -7,6 +7,10 @@ class No:
     @property
     def valor(self):
         return self._valor
+        
+    @valor.setter
+    def valor(self, novo_valor):
+        self.valor = novo_valor
     
     @property
     def proximo(self):
