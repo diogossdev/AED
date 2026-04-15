@@ -1,4 +1,4 @@
-#Criando PilhaEncadeada e PilhaEncadeada a partir da ListaEncadeada
+#Criando PilhaEncadeada e FilaEncadeada a partir da ListaEncadeada
 from ex009 import ListaEncadeada
 
 class PilhaEncadeada:
