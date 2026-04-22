@@ -50,7 +50,7 @@ class Arvore_Binaria:
 
   @root.setter
   def root(self, root):
-    self.__root = root
+    self.__root = No(root)
 
   def em_ordem(self, no):
     if no != None:
